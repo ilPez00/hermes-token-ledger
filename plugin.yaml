@@ -1,0 +1,33 @@
+name: hermes-token-ledger
+version: "1.0.0"
+description: "Track LLM token usage and estimated cost per session in SQLite. Accumulates via post_api_request, exposes token_report/token_reset tools, a /tokens slash command, and optional budget warnings."
+author: "ilPez00"
+license: "MIT"
+kind: standalone
+platforms:
+  - linux
+  - macos
+  - windows
+provides_tools:
+  - token_report
+  - token_reset
+provides_hooks:
+  - post_api_request
+config_schema:
+  budget_tokens:
+    type: int
+    default: 0
+    description: "Per-session token budget (0 disables warnings)."
+  warn_threshold:
+    type: float
+    default: 0.8
+    description: "Fraction of budget at which to warn."
+  estimate_cost:
+    type: bool
+    default: true
+    description: "Estimate USD cost using a built-in pricing table."
+tags:
+  - tokens
+  - cost
+  - observability
+  - budget
